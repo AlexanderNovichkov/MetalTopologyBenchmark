@@ -50,8 +50,3 @@ with open(file) as f:
             f'datasets/vr_boundary_matrices/{args.pointcloud_name}_'
             f'{args.max_dimension}_{args.max_edge_length}_phat.txt',
             boundary_matrix)
-
-        # start_time = time.time()
-        # diag = simplex_tree.persistence(homology_coeff_field=2, min_persistence=0)
-        # print(len(diag))
-        # print('time=', time.time() - start_time)
