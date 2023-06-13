@@ -18,6 +18,7 @@ def make_boundary_matrix(simplex_tree: SimplexTree) -> list[list]:
 
 
 def write_boundary_matrix_with_metal_format(path: str, boundary_matrix: list[list]):
+    print("Writing boundary matrix in metal format...")
     non_zeros = 0
     for col in boundary_matrix:
         non_zeros += len(col)
@@ -31,9 +32,17 @@ def write_boundary_matrix_with_metal_format(path: str, boundary_matrix: list[lis
 
 
 def write_boundary_matrix_with_phat_format(path: str, boundary_matrix: list[list]):
+    print("Writing boundary matrix in phat format...")
     with open(path, 'w') as f:
         lines = []
         for col in boundary_matrix:
             lines.append("{} {}".format(max(0, len(col) - 1), " ".join(map(str, col))))
         result = "\n".join(lines)
         f.writelines(result)
+
+def write_boundary_matrix_with_futhark_ph_format(path: str, boundary_matrix: list[list]):
+    print("Writing boundary matrix in futhark-ph format...")
+    with open(path, 'w') as f:
+        for col, rows in enumerate(boundary_matrix):
+            for row in rows:
+                f.write(f'{row} {col}\n')

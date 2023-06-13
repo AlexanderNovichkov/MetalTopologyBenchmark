@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import argparse
-import time
 
 import gudhi
 from gudhi.rips_complex import RipsComplex
@@ -39,14 +38,16 @@ with open(file) as f:
         print("Making boundary matrix...")
         boundary_matrix = utils.make_boundary_matrix(simplex_tree)
 
-        print("Writing boundary matrix in metal format...")
         utils.write_boundary_matrix_with_metal_format(
             f'datasets/vr_boundary_matrices/{args.pointcloud_name}_'
             f'{args.max_dimension}_{args.max_edge_length}_metal.txt',
             boundary_matrix)
 
-        print("Writing boundary matrix in phat format...")
         utils.write_boundary_matrix_with_phat_format(
             f'datasets/vr_boundary_matrices/{args.pointcloud_name}_'
             f'{args.max_dimension}_{args.max_edge_length}_phat.txt',
             boundary_matrix)
+
+        utils.write_boundary_matrix_with_futhark_ph_format(f'datasets/vr_boundary_matrices/{args.pointcloud_name}_'
+                                                           f'{args.max_dimension}_{args.max_edge_length}_futph.txt',
+                                                           boundary_matrix)
